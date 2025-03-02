@@ -1,14 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven "M3"
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/calculator-app.git'
+                git 'https://github.com/karthikvt22/project.git'
             }
         }
 
@@ -24,20 +20,10 @@ pipeline {
             }
         }
 
-        stage('Archive') {
+        stage('Archive Artifacts') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
     }
-
-    post {
-        success {
-            echo "Build successful!"
-        }
-        failure {
-            echo "Build failed!"
-        }
-    }
 }
-
